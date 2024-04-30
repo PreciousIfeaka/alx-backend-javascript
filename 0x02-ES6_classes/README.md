@@ -1,1 +1,1 @@
-0x02-ES6_classes
+This directory contains code that I have written while learning JavaScript classes.
