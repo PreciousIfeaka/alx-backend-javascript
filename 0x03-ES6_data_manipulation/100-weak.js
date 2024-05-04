@@ -2,7 +2,7 @@ export const weakMap = new WeakMap();
 let i = 0;
 
 export function queryAPI(endpoint) {
-  if (i < 5) {
+  if (i < 4) {
     i += 1;
     weakMap.set(endpoint, i);
 
