@@ -7,9 +7,13 @@ function countStudents(filePath) {
     if (err) {
       reject(new Error('Cannot load database'));
     } else {
+      let printResult = [];
       students = students.toString().split('\r\n'); // This code was run on windows OS hence the /r
       let studentsSize = students.length - 1;
-      console.log(`Number of students: ${studentsSize}`);
+      let printStudentSize = `Number of students: ${studentsSize}`;
+      console.log(printStudentSize);
+      printResult.push(printStudentSize);
+
 
       const data = [];
       students.forEach((student, index) => {
@@ -40,10 +44,15 @@ function countStudents(filePath) {
       sizeField1 = groupedNames[fields[0]].length;
       sizeField2 = groupedNames[fields[1]].length;
 
-      console.log(`Number of students in ${fields[0]}: ${sizeField1}. List: ${groupedNames[fields[0]].join(', ')}`);
-      console.log(`Number of students in ${fields[1]}: ${sizeField2}. List: ${groupedNames[fields[1]].join(', ')}`);
+
+      result1 = `Number of students in ${fields[0]}: ${sizeField1}. List: ${groupedNames[fields[0]].join(', ')}`;
+      result2 = `Number of students in ${fields[1]}: ${sizeField2}. List: ${groupedNames[fields[1]].join(', ')}`;
+      console.log(`${result1}\n${result2}`);
+
+      printResult.push(result1);
+      printResult.push(result2);
+      resolve(printResult);
     }
-    resolve(students);
   });
 });
 }
