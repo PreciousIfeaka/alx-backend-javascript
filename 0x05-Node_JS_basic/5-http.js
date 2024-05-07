@@ -1,4 +1,5 @@
 const http = require('http');
+const process = require('process');
 const countStudents = require('./3-read_file_async');
 
 const path = process.argv[2];
@@ -13,12 +14,12 @@ const app = http.createServer((req, res) => {
   }
   if (req.url === '/students') {
     res.statusCode = 200;
-    countStudents(path)
-      .then((data) => {
-        res.end(`This is the list of our students\n${data.join('\n')}`);
-      })
-      .catch((error) => {
-        res.end(error);
+    countStudents(path).then((data) => {
+      const resp = `This is the list of our students\n${data}`;
+      res.end(resp);
+    })
+      .catch(() => {
+        res.end('This is the list of our students\nCannot load the database');
       });
   }
 });
