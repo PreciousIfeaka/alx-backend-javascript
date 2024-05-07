@@ -13,3 +13,5 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Express app server listening on ${hostname}:${port}...`);
 });
+
+module.exports = app;
