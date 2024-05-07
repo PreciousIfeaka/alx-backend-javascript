@@ -1,11 +1,8 @@
 const fs = require('fs');
 
 function countStudents(filePath) {
-
-  let students = fs.readFileSync(filePath, 'utf8');
-  if (!filePath) {
-    throw Error('Cannot load the database');
-  } else {
+  try {
+    let students = fs.readFileSync(filePath, 'utf8');
     students = students.toString().split('\r\n'); // This code was run on windows OS hence the /r
     let studentsSize = students.length - 1;
     console.log(`Number of students: ${studentsSize}`);
@@ -41,6 +38,9 @@ function countStudents(filePath) {
 
     console.log(`Number of students in ${fields[0]}: ${sizeField1}. List: ${groupedNames[fields[0]].join(', ')}`);
     console.log(`Number of students in ${fields[1]}: ${sizeField2}. List: ${groupedNames[fields[1]].join(', ')}`);
+  } catch (error) {
+    throw new Error('Cannot load the database');
   }
 }
-countStudents('./database.csv');
+
+module.exports = countStudents;

@@ -10,7 +10,7 @@ const app = http.createServer((request, response) => {
 });
 
 app.listen(PORT, hostname, () => {
-  console.log(`App server running at http://${hostname}:${PORT}/`)
-})
+  console.log(`App server running at http://${hostname}:${PORT}/`);
+});
 
 module.exports = app;
