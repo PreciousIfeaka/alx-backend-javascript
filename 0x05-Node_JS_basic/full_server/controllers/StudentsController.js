@@ -1,16 +1,11 @@
+const path = process.argv[2];
 const readDatabase = require('../utils');
 
 class StudentsController {
   static getAllStudents(request, response) {
-    readDatabase(process.argv[2].toString()).then((students) => {
-      const output = [];
-      output.push('This is the list of our students');
-      const keys = Object.keys(students);
-      keys.sort();
-      for (let i = 0; i < keys.length; i += 1) {
-        output.push(`Number of students in ${keys[i]}: ${students[keys[i]].length}. List: ${students[keys[i]].join(', ')}`);
-      }
-      response.status(200).send(output.join('\n'));
+    readDatabase(path).then((data) => {
+      const dataa = data.split('\n').slice(1);
+      response.status(200).send(`This is the list of our students\n${dataa.join('\n')}`);
     }).catch(() => {
       response.status(500).send('Cannot load the database');
     });
@@ -18,16 +13,22 @@ class StudentsController {
 
   static getAllStudentsByMajor(request, response) {
     const field = request.params.major;
-    readDatabase(process.argv[2].toString()).then((students) => {
-      if (!(field in students)) {
-        response.status(500).send('Major parameter must be CS or SWE');
-      } else {
-        response.status(200).send(`List: ${students[field].join(', ')}`);
-      }
-    }).catch(() => {
-      response.status(500).send('Cannot load the database');
-    });
+    if (field === 'CS' || field === 'SWE') {
+      readDatabase(path).then((list) => {
+        list = list.split('\n').slice(1); // eslint-disable-line no-param-reassign
+        list.forEach((listItem) => {
+          if (listItem.includes(field)) {
+            listItem = listItem.split(': '); // eslint-disable-line no-param-reassign
+            const fieldList = `List: ${listItem[2]}`;
+            response.status(200).send(fieldList);
+          }
+        });
+      }).catch(() => {
+        response.status(500).send('Cannot load the database');
+      });
+    } else {
+      response.status(500).send('Major parameter must be CS or SWE');
+    }
   }
 }
-
 module.exports = StudentsController;
