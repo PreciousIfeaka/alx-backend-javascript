@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-// It won't return a Promise
 function countStudents(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, students) => {
@@ -8,7 +7,7 @@ function countStudents(filePath) {
         reject(Error('Cannot load database'));
       } else {
         const printResult = [];
-        students = students.toString().split('\r\n'); // This code was run on windows OS hence the /r
+        students = students.toString().split('\n'); // This code was run on windows OS hence the /r
         let studentsSize = students.length - 1;
         if (students[studentsSize] === '') {
           students.pop();
