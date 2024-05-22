@@ -18,4 +18,7 @@ describe('calculateNumber', () => {
   it('calculateNumber should return rounded sum of its arguments', () => {
     assert.equal(calculateNumber(0.3, 0.7), Math.round(0.3) + Math.round(0.7));
   });
+  it('calculateNumber should return rounded sum of its arguments', () => {
+    assert.equal(calculateNumber(2, 3.7), Math.round(2) + Math.round(3.7));
+  });
 });
