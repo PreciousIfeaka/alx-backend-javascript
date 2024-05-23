@@ -106,7 +106,7 @@ describe('/login', () => {
       url: 'http://localhost:7865/login',
       json: { userName: 'Betty' }
     }, (error, res, body) => {
-      expect(res.body).to.be.equal('Welcome Betty');
+      expect(res.body).to.be.equal('Hello Betty');
     });
   });
 
@@ -119,7 +119,7 @@ describe('/login', () => {
       body: data,
       json: true,
     }, (error, res, body) => {
-      expect(body).to.contain('Welcome Betty');
+      expect(body).to.contain('Hello Betty');
     });
   });
 

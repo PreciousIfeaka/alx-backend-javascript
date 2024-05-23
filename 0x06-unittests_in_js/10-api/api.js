@@ -21,6 +21,7 @@ app.get('/available_payments', (req, res) => {
 })
 
 app.use(bodyParser.json());
+
 app.post('/login', (req, res) => {
   res.send(`Welcome ${req.body.userName}`)
 })
